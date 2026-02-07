@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>An Important Message Regarding the Kuperman Brothers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Manrope:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050506;
+      --surface: #0c0c0e;
+      --surface-2: #121214;
+      --border: rgba(255,255,255,0.06);
+      --text: #f5f5f7;
+      --text-dim: #86868b;
+      --red: #e53935;
+      --red-soft: rgba(229,57,53,0.1);
+      --red-glow: rgba(229,57,53,0.3);
+      --gold: #d4a853;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gradient-bg {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 100% 70% at 50% 0%, rgba(229,57,53,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 60% at 80% 80%, rgba(229,57,53,0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.02;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    .display {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+    }
+
+    .label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
+      filter: blur(80px);
+      opacity: 0.25;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--red-soft);
+      border: 1px solid rgba(229,57,53,0.3);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 0.1s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      max-width: 1000px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 0.3s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      color: var(--text-dim);
+      max-width: 700px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 0.5s forwards;
+    }
+
+    .hero-warning {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 2rem;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 0.7s forwards;
+    }
+
+    .hero-warning-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--red-soft);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-warning-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--red);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .hero-warning-text {
+      text-align: left;
+    }
+
+    .hero-warning-text strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-warning-text span {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section { padding: clamp(5rem, 12vw, 10rem) 0; }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    /* Concerns */
+    .concerns {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .concerns-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .concern {
+      padding: 2.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: border-color 0.3s;
+    }
+
+    .concern:hover {
+      border-color: var(--red);
+    }
+
+    .concern-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--red);
+      opacity: 0.3;
+      margin-bottom: 1rem;
+    }
+
+    .concern h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .concern p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* The Facts */
+    .facts-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .fact {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .fact:last-child {
+      border-bottom: none;
+    }
+
+    .fact-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--red-soft);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fact-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--red);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .fact-content h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .fact-content p {
+      font-size: 1rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    /* Quote */
+    .quote-section {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 50%, var(--bg) 100%);
+      text-align: center;
+      padding: 8rem 2rem;
+    }
+
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 6rem;
+      color: var(--red);
+      opacity: 0.2;
+      line-height: 0.5;
+      margin-bottom: 1.5rem;
+    }
+
+    blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      font-style: italic;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      line-height: 1.55;
+    }
+
+    cite {
+      font-style: normal;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* Eligible Candidates */
+    .candidates {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .candidates-intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .candidates-intro p {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .candidate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .candidate-card {
+      padding: 2.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .candidate-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .candidate-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .candidate-card .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .candidate-card p {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .candidate-card .pros {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .candidate-card .pros span {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .candidate-card .pros ul {
+      list-style: none;
+    }
+
+    .candidate-card .pros li {
+      font-size: 0.85rem;
+      color: var(--text);
+      padding: 0.4rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .candidate-card .pros li::before {
+      content: '+';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* The Math */
+    .math-section {
+      text-align: center;
+    }
+
+    .equation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .equation-part {
+      padding: 2rem 3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .equation-part.bad {
+      border-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .equation-part.good {
+      border-color: var(--gold);
+      background: rgba(212,168,83,0.08);
+    }
+
+    .equation-part h5 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .equation-part.bad h5 {
+      color: var(--red);
+    }
+
+    .equation-part.good h5 {
+      color: var(--gold);
+    }
+
+    .equation-part p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .equation-symbol {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--text-dim);
+    }
+
+    .math-conclusion {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* Expert Opinions */
+    .experts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .expert {
+      padding: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+
+    .expert-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .expert-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .expert-title {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 10rem 2rem;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(212,168,83,0.06) 0%, transparent 60%),
+        var(--bg);
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-desc {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 650px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .cta-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 2.5rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .cta-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .cta-link.gold {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .cta-link.outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .cta-link.outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      opacity: 0.5;
+      max-width: 550px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Reveals */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .concerns-grid { grid-template-columns: 1fr; }
+      .candidate-grid { grid-template-columns: 1fr; }
+      .experts-grid { grid-template-columns: 1fr; }
+      .equation { flex-direction: column; gap: 1rem; }
+      .equation-symbol { transform: rotate(90deg); }
+    }
+
+    @media (max-width: 640px) {
+      .fact { grid-template-columns: 1fr; gap: 1.5rem; }
+      .hero-warning { flex-direction: column; text-align: center; }
+      .hero-warning-text { text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gradient-bg"></div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-badge">Public Service Announcement</div>
+    <h1 class="display hero-title">
+      Rick and Jeff Kuperman Should Not Marry Each Other
+    </h1>
+    <p class="hero-subtitle">
+      A concerned community's formal request that the Kuperman Brothers 
+      seek romantic partners outside of their immediate family.
+    </p>
+    <div class="hero-warning">
+      <div class="hero-warning-icon">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="hero-warning-text">
+        <strong>This is not a drill</strong>
+        <span>They spend a lot of time together. Someone needed to say something.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Concerns -->
+  <section class="concerns">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">Why We're Worried</p>
+        <h2 class="display section-title">The Warning Signs</h2>
+      </div>
+      <div class="concerns-grid">
+        <div class="concern reveal">
+          <div class="concern-number">01</div>
+          <h4>They Work Together Constantly</h4>
+          <p>The Kuperman Brothers have collaborated on every single project. Every. Single. One. This level of codependency is usually reserved for... well, married couples.</p>
+        </div>
+        <div class="concern reveal" style="transition-delay: 0.1s;">
+          <div class="concern-number">02</div>
+          <h4>They Finish Each Other's Choreography</h4>
+          <p>Witnesses report that Rick will start a movement and Jeff will complete it, seamlessly, without words. This is romantic movie behavior.</p>
+        </div>
+        <div class="concern reveal" style="transition-delay: 0.2s;">
+          <div class="concern-number">03</div>
+          <h4>The 13-Month Gap</h4>
+          <p>They're only 13 months apart. They've essentially been together since birth. At what point does "siblings" become "life partners who happen to share DNA"?</p>
+        </div>
+        <div class="concern reveal" style="transition-delay: 0.3s;">
+          <div class="concern-number">04</div>
+          <h4>They Got Black Belts Together</h4>
+          <p>Third degree black belts in Kenpo Karate. Achieved simultaneously. That's a couples activity if we've ever seen one.</p>
+        </div>
+        <div class="concern reveal" style="transition-delay: 0.4s;">
+          <div class="concern-number">05</div>
+          <h4>Joint Everything</h4>
+          <p>Joint website. Joint credits. Joint interviews. At this point, do they have separate bank accounts? Separate apartments? We're asking questions.</p>
+        </div>
+        <div class="concern reveal" style="transition-delay: 0.5s;">
+          <div class="concern-number">06</div>
+          <h4>They Look Almost Like Twins</h4>
+          <p>According to Harvard Magazine, they "look almost like twins." This level of compatibility should be shared with a non-related partner.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Facts -->
+  <section>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">Legal & Ethical Framework</p>
+        <h2 class="display section-title">Why This Would Be Wrong</h2>
+        <p class="section-desc">
+          We consulted absolutely no one for this section, but we're pretty confident.
+        </p>
+      </div>
+      <div class="facts-list">
+        <div class="fact reveal">
+          <div class="fact-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="fact-content">
+            <h4>It's Illegal in Most Jurisdictions</h4>
+            <p>We didn't actually look this up, but we're very confident that marrying your sibling is frowned upon in the United States, Canada, and basically everywhere except maybe some very specific historical European monarchies.</p>
+          </div>
+        </div>
+        <div class="fact reveal">
+          <div class="fact-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="fact-content">
+            <h4>Think of the Thanksgiving Dinners</h4>
+            <p>The logistics would be impossible. "Honey, your mom said..." "That's YOUR mom too." "Right. Our mom." It would be chaos. Pure, absolute chaos.</p>
+          </div>
+        </div>
+        <div class="fact reveal">
+          <div class="fact-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="fact-content">
+            <h4>There Are Other People</h4>
+            <p>New York City has approximately 8.3 million residents. At least a few of them are probably single and would love to date a Tony-nominated choreographer. The Kuperman Brothers have OPTIONS.</p>
+          </div>
+        </div>
+        <div class="fact reveal">
+          <div class="fact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="fact-content">
+            <h4>The Wikipedia Article Would Be Weird</h4>
+            <p>"Rick Kuperman (born [date]) is an American choreographer. He is married to his brother Jeff Kuperman, who is also a choreographer." Imagine having to read that. Nobody wants to read that.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote-section reveal">
+    <div class="container">
+      <div class="quote-mark">"</div>
+      <blockquote>
+        "I love my brother very much. In a normal, brotherly way. The way 
+        brothers love each other. Not in a marriage way. Why are you asking 
+        me this? Who made this website?"
+      </blockquote>
+      <cite>Rick Kuperman (Hypothetical Response)</cite>
+    </div>
+  </section>
+
+  <!-- Eligible Candidates -->
+  <section class="candidates">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">The Solution</p>
+        <h2 class="display section-title">Eligible Non-Brothers to Consider</h2>
+      </div>
+      <div class="candidates-intro reveal">
+        <p>
+          The following is a non-exhaustive list of people the Kuperman Brothers 
+          could theoretically pursue romantic relationships with, all of whom 
+          share zero DNA with either Rick or Jeff.
+        </p>
+      </div>
+      <div class="candidate-grid">
+        <div class="candidate-card reveal">
+          <h4>Literally Any Broadway Performer</h4>
+          <p class="subtitle">They work with hundreds of them</p>
+          <p>
+            They choreograph for Broadway. There are presumably many single, 
+            talented, attractive people in that industry who would be thrilled 
+            to date someone with Tony nominations.
+          </p>
+          <div class="pros">
+            <span>Benefits</span>
+            <ul>
+              <li>Shared professional interests</li>
+              <li>Understands the lifestyle</li>
+              <li>Not their sibling</li>
+            </ul>
+          </div>
+        </div>
+        <div class="candidate-card reveal" style="transition-delay: 0.1s;">
+          <h4>Someone from Harvard or Princeton</h4>
+          <p class="subtitle">They're both Ivy League grads</p>
+          <p>
+            Alumni networks exist for a reason. Surely there's a fellow Harvard 
+            or Princeton graduate who would appreciate Rick's moral psychology 
+            degree or Jeff's love of Russian literature.
+          </p>
+          <div class="pros">
+            <span>Benefits</span>
+            <ul>
+              <li>Intellectual compatibility</li>
+              <li>Impressive at dinner parties</li>
+              <li>Definitely not their sibling</li>
+            </ul>
+          </div>
+        </div>
+        <div class="candidate-card reveal" style="transition-delay: 0.2s;">
+          <h4>A Fellow Martial Artist</h4>
+          <p class="subtitle">Third degree black belts attract admirers</p>
+          <p>
+            Someone who also practices Kenpo Karate could bond over shared 
+            discipline and physical training. Plus, sparring is basically 
+            dancing, which they're already good at.
+          </p>
+          <div class="pros">
+            <span>Benefits</span>
+            <ul>
+              <li>Mutual respect for the craft</li>
+              <li>Built-in workout partner</li>
+              <li>Zero genetic overlap with Kupermans</li>
+            </ul>
+          </div>
+        </div>
+        <div class="candidate-card reveal" style="transition-delay: 0.3s;">
+          <h4>Honestly Just Anyone Else</h4>
+          <p class="subtitle">The bar is on the floor</p>
+          <p>
+            At this point, we're not picky. A barista. A neighbor. Someone from 
+            the gym. A person they meet at a paella restaurant (Jeff would like 
+            that). Anyone who didn't grow up in the same house as them.
+          </p>
+          <div class="pros">
+            <span>Benefits</span>
+            <ul>
+              <li>Brings new perspectives to the relationship</li>
+              <li>Different family to visit on holidays</li>
+              <li>Legally marriageable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Math -->
+  <section class="math-section">
+    <div class="container reveal">
+      <div class="section-header">
+        <p class="label">Scientific Analysis</p>
+        <h2 class="display section-title">The Math Checks Out</h2>
+      </div>
+      <div class="equation">
+        <div class="equation-part bad">
+          <h5>Rick + Jeff</h5>
+          <p>Brothers (Bad)</p>
+        </div>
+        <div class="equation-symbol">≠</div>
+        <div class="equation-part good">
+          <h5>Rick + Someone Else</h5>
+          <p>Not Brothers (Good)</p>
+        </div>
+      </div>
+      <div class="equation">
+        <div class="equation-part bad">
+          <h5>Jeff + Rick</h5>
+          <p>Still Brothers (Still Bad)</p>
+        </div>
+        <div class="equation-symbol">≠</div>
+        <div class="equation-part good">
+          <h5>Jeff + Someone Else</h5>
+          <p>Also Not Brothers (Also Good)</p>
+        </div>
+      </div>
+      <p class="math-conclusion">
+        As you can see, the mathematics here are irrefutable. Any combination 
+        involving both Kuperman Brothers is categorically less optimal than 
+        combinations involving only one Kuperman Brother plus a non-Kuperman.
+      </p>
+    </div>
+  </section>
+
+  <!-- Expert Opinions -->
+  <section>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="label">Expert Testimonials</p>
+        <h2 class="display section-title">What the Experts Say</h2>
+      </div>
+      <div class="experts-grid">
+        <div class="expert reveal">
+          <p class="expert-quote">
+            "I have a PhD and I can confirm that siblings should not marry each 
+            other. This is not medical advice, but it is advice."
+          </p>
+          <p class="expert-name">A Doctor (Unspecified)</p>
+          <p class="expert-title">Doctorate in Something, Probably</p>
+        </div>
+        <div class="expert reveal" style="transition-delay: 0.1s;">
+          <p class="expert-quote">
+            "From a legal standpoint— actually, do I even need to explain this? 
+            This should be obvious. Why is there a website about this?"
+          </p>
+          <p class="expert-name">A Lawyer</p>
+          <p class="expert-title">Confused but Cooperative</p>
+        </div>
+        <div class="expert reveal" style="transition-delay: 0.2s;">
+          <p class="expert-quote">
+            "The Kuperman Brothers are both very talented and should use that 
+            talent to attract non-related partners. This is my professional 
+            matchmaking opinion."
+          </p>
+          <p class="expert-name">A Matchmaker</p>
+          <p class="expert-title">First Rule: No Siblings</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container reveal">
+      <p class="label">Take Action</p>
+      <h2 class="display cta-title">Learn More About the Kupermans</h2>
+      <p class="cta-desc">
+        Now that we've established that they should not marry each other, 
+        feel free to learn more about them as individuals who are single 
+        and available to date non-siblings.
+      </p>
+      <div class="cta-links">
+        <a href="https://sage-assistant.github.io/ricky-kuperman/" target="_blank" class="cta-link gold">
+          Meet Rick (Single)
+        </a>
+        <a href="https://sage-assistant.github.io/jeff-kuperman/" target="_blank" class="cta-link outline">
+          Meet Jeff (Also Single)
+        </a>
+        <a href="https://kupermanbrothers.com" target="_blank" class="cta-link outline">
+          Their Professional Work (Not Dating Site)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="footer-logo">Kupermans Should Date Other People Foundation</p>
+      <p class="footer-tagline">A Nonprofit We Just Made Up</p>
+      <p class="footer-disclaimer">
+        This website is a joke. Rick and Jeff Kuperman are, as far as we know, 
+        not planning to marry each other. They are brothers who work together, 
+        which is normal and fine. This entire website exists because someone 
+        thought it would be funny. It is funny. But also, Rick, Jeff, if you're 
+        reading this: please find nice partners who are not each other. We 
+        believe in you. You're very talented. You deserve love. Non-sibling love.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
